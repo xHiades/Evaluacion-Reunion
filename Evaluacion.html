@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celular Responsable: ¿Qué harías tú?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .icon {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Celular Responsable: ¿Qué harías tú?</h1>
+    <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png" alt="Celular Icono" class="icon">
+    <div id="quiz"></div>
+    <div id="result"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "1. Durante las clases, ¿cómo debería manejar tu hijo el uso del celular?",
+                answers: [
+                    "a) Usarlo para revisar redes sociales cuando el profesor no está mirando",
+                    "b) Mantenerlo en silencio y guardado en la mochila",
+                    "c) Revisarlo solo en los descansos"
+                ],
+                correct: 1
+            },
+            {
+                question: "2. En caso de recibir notificaciones constantes durante la noche, ¿qué debería hacer tu hijo?",
+                answers: [
+                    "a) Responder todos los mensajes antes de dormir",
+                    "b) Poner el celular en modo 'No molestar'",
+                    "c) Ignorar las notificaciones y revisar el celular a la mañana siguiente"
+                ],
+                correct: 1
+            },
+            {
+                question: "3. Si tu hijo está estudiando y recibe mensajes de amigos, ¿cuál es la mejor manera de manejarlo?",
+                answers: [
+                    "a) Alternar entre estudiar y responder mensajes",
+                    "b) Silenciar las notificaciones y enfocarse en el estudio",
+                    "c) Responder los mensajes rápidamente para no perder la concentración"
+                ],
+                correct: 1
+            },
+            {
+                question: "4. Durante la cena familiar, ¿cómo debería manejar tu hijo el uso del celular?",
+                answers: [
+                    "a) Usarlo solo si recibe mensajes importantes",
+                    "b) Dejarlo en su habitación y no usarlo durante la cena",
+                    "c) Tenerlo en la mesa pero en modo silencio"
+                ],
+                correct: 1
+            },
+            {
+                question: "5. En caso de que sea necesario que tu hijo use el celular para comunicarse contigo, ¿qué debería hacer durante las horas de clase?",
+                answers: [
+                    "a) Pedir permiso al profesor para usar el celular",
+                    "b) Usarlo discretamente sin que el profesor lo note",
+                    "c) Esperar al recreo para usarlo"
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const quizContainer = document.getElementById("quiz");
+            const question = questions[currentQuestion];
+            
+            let html = `<div class="question">
+                <h2>${question.question}</h2>
+            `;
+            
+            for (let i = 0; i < question.answers.length; i++) {
+                html += `<button onclick="checkAnswer(${i})">${question.answers[i]}</button>`;
+            }
+            
+            html += "</div>";
+            quizContainer.innerHTML = html;
+        }
+
+        function checkAnswer(answer) {
+            if (answer === questions[currentQuestion].correct) {
+                score++;
+            }
+            
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            const resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = `Has respondido correctamente ${score} de ${questions.length} preguntas.`;
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
